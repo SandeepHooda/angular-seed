@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service';
 import { LoginVO } from './LoginVO';
+import { Store, select } from '@ngrx/store';
+import * as LoginVOActions from '../../actions/loginvo.actions';
+
 
 @Component({
   selector: 'app-read-data',
@@ -9,7 +12,15 @@ import { LoginVO } from './LoginVO';
 })
 export class ReadDataComponent {
    regid : String = '';
-  constructor( private loginService : LoginService){}
+   //loginVO$: Observable<LoginVO>; 
+   aNew: LoginVO=new LoginVO();
+  constructor( private loginService : LoginService, private store: Store<{myDataStore: LoginVO}>){
+     store.pipe(select('myDataStore')).subscribe(data => {
+      this.regid = data.regID;
+     }
+
+     );
+  }
 
   ngOnInit() {
     
@@ -17,16 +28,7 @@ export class ReadDataComponent {
 
   getData(){
 
-    let regID: String = "Data";
-    this.loginService.validateLogin(regID).subscribe({
-      next: (loginVO: LoginVO) =>{
-        this.regid = loginVO.regID
-      },
-      error: ()=>{
-        alert("error")
-     
-       }
-   });
+    this.store.dispatch(LoginVOActions.GetLogin({data: "GetLoginInfo-PassedFromComp-DispactEvent"}));
 
 
   }
