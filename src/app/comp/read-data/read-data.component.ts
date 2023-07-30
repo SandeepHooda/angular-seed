@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service';
 import { LoginVO } from './LoginVO';
-import { Store, createFeatureSelector, createSelector, select } from '@ngrx/store';
+import { Store,  select } from '@ngrx/store';
 import * as LoginVOActions from '../../actions/loginvo.actions';
 import { MyDatLoginaStore } from '../../reducers/login.reducer';
-import {filter} from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { state } from '@angular/animations';
+import { nameSelector, regIDSelector } from '../../selector/logion.selectors';
+
 
 
 @Component({
@@ -17,21 +17,12 @@ import { state } from '@angular/animations';
 
 export class ReadDataComponent {
   
-   regid : String = '';
-   name : String = '';
-  //name$: Observable<String>;
-   //loginVO$: Observable<LoginVO>; 
+   regid$ :Observable<String>;
+   name$: Observable<String>;
    aNew: LoginVO=new LoginVO();
   constructor( private loginService : LoginService, private store: Store<{myDataStore: MyDatLoginaStore}>){
-   //this.name$ =store.select(aSelector);
-    //this.name$.subscribe(v => console.log("checking the selector "+v))
-
-     this.store.pipe(select('myDataStore')).subscribe(data => {
-      this.regid = data.loginData?.regID;
-      this.name = data.nameVO?.name;
-     }
-
-     );
+   this.name$ =store.select(nameSelector);
+ this.regid$ = store.select(regIDSelector);
   }
 
   ngOnInit() {
@@ -48,10 +39,5 @@ export class ReadDataComponent {
 
 
 }
-/*export const aSelector = createSelector( 
-  createFeatureSelector('myDataStore'),
-  (state:MyDatLoginaStore) =>{
-    return state.nameVO.regID;
-  }
-)*/
+
 
