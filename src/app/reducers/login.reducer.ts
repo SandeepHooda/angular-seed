@@ -21,15 +21,15 @@ let init:LoginVO = new LoginVO()
         return state;
       }),
       on(LoginVOActions.GetLoginSuccess, (state, action) => {
-        console.log("login success "+action.loginResp.regID); 
+        console.log("login success "+action.regID); 
     
-        return {...state, loginData:action.loginResp}
+        return {...state, loginData:action}
       }),
 
       on(LoginVOActions.GetNameSuccess, (state, action) => {
-        console.log("name success "+action.nameResp.name); 
+        console.log("name success "+action.name); 
     
-        return {...state, nameVO:action.nameResp}
+        return {...state, nameVO:action}
       }),
     
       );

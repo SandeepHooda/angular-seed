@@ -26,7 +26,7 @@ import { EMPTY, Observable } from 'rxjs';
     )
       .pipe(
         tap(data => console.log("hi resposne receive : 2nd tap " +data['regID'])),
-        map(data => (LoginVOActions.GetLoginSuccess({loginResp:data})))
+        map(data => (LoginVOActions.GetLoginSuccess(data)))
       ))            
  )
 );
@@ -38,7 +38,7 @@ getNameVO$=  createEffect(() => this.actions$.pipe(
   mergeMap((action) => this.loginService.getName(action['data'] )
     .pipe(
       tap(data => console.log("name resposne receive : tap " +data['name'])),
-      map(data => (LoginVOActions.GetNameSuccess({nameResp:data})))
+      map(data => (LoginVOActions.GetNameSuccess(data)))
     ))            
 )
 );
