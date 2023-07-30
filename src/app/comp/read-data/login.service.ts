@@ -10,4 +10,8 @@ export class LoginService {
   validateLogin(regID: String) :  Observable<LoginVO> {
     return this.http.get<LoginVO>('http://localhost:8080/safemate-heroku/ws/safemate/login/key?regID='+regID);
   }
+
+  getName(inputParam: String) :  Observable<LoginVO> {
+    return this.http.get<LoginVO>('http://localhost:8080/safemate-heroku/ws/safemate/user/data?inputParam='+inputParam);
+  }
 }

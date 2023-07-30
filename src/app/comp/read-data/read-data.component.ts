@@ -3,6 +3,7 @@ import { LoginService } from './login.service';
 import { LoginVO } from './LoginVO';
 import { Store, select } from '@ngrx/store';
 import * as LoginVOActions from '../../actions/loginvo.actions';
+import { MyDatLoginaStore } from '../../reducers/login.reducer';
 
 
 @Component({
@@ -12,11 +13,13 @@ import * as LoginVOActions from '../../actions/loginvo.actions';
 })
 export class ReadDataComponent {
    regid : String = '';
+   name : String = '';
    //loginVO$: Observable<LoginVO>; 
    aNew: LoginVO=new LoginVO();
-  constructor( private loginService : LoginService, private store: Store<{myDataStore: LoginVO}>){
+  constructor( private loginService : LoginService, private store: Store<{myDataStore: MyDatLoginaStore}>){
      store.pipe(select('myDataStore')).subscribe(data => {
-      this.regid = data.regID;
+      this.regid = data.loginData?.regID;
+      this.name = data.nameVO?.name;
      }
 
      );
@@ -26,11 +29,12 @@ export class ReadDataComponent {
     
   }
 
-  getData(){
-
+  getKey(){
     this.store.dispatch(LoginVOActions.GetLogin({data: "GetLoginInfo-PassedFromComp-DispactEvent"}));
+  }
 
-
+  getName(){
+    this.store.dispatch(LoginVOActions.GetName({data: "GetName"}));
   }
 
 

@@ -31,5 +31,18 @@ import { EMPTY, Observable } from 'rxjs';
  )
 );
 
+
+getNameVO$=  createEffect(() => this.actions$.pipe(
+  ofType(LoginVOActions.GET_NAME),
+
+  mergeMap((action) => this.loginService.getName(action['data'] )
+    .pipe(
+      tap(data => console.log("name resposne receive : tap " +data['name'])),
+      map(data => (LoginVOActions.GetNameSuccess({nameResp:data})))
+    ))            
+)
+);
+
+
     constructor(private actions$: Actions, private loginService: LoginService) {}
 }
