@@ -1,16 +1,9 @@
 import { createReducer,  on } from '@ngrx/store';
 import {LoginVO}  from '../comp/read-data/LoginVO';
 import * as LoginVOActions from '../actions/loginvo.actions';
+import { loginDataObjectNameInStore, nameObjectNameInStore } from './app.state';
 
 
-
-export interface MyDatLoginaStore {
-  loginData: LoginVO ;
-  nameVO: LoginVO ;
-  emailIDAny: String ;
-
-
-}
 
 
 let init:LoginVO = new LoginVO()
@@ -20,16 +13,16 @@ let init:LoginVO = new LoginVO()
            
         return state;
       }),
-      on(LoginVOActions.GetLoginSuccess, (state, action) => {
-        console.log("login success "+action.regID); 
+      on(LoginVOActions.GetLoginSuccess, (state, loginDataVO) => {
+        console.log("login success "+loginDataVO.regID); 
     
-        return {...state, loginData:action}
+        return {...state, [loginDataObjectNameInStore]:loginDataVO} //This will create new State by coping existing immutable state and then adding loginDataVO to it. The name of loginDataVO object is defined by loginDataObjectNameInStore variable 
       }),
 
-      on(LoginVOActions.GetNameSuccess, (state, action) => {
-        console.log("name success "+action.name); 
+      on(LoginVOActions.GetNameSuccess, (state, nameVOData) => {
+        console.log("name success "+nameVOData.name); 
     
-        return {...state, nameVO:action}
+        return {...state, [nameObjectNameInStore]:nameVOData}
       }),
     
       );

@@ -3,9 +3,9 @@ import { LoginService } from './login.service';
 import { LoginVO } from './LoginVO';
 import { Store,  select } from '@ngrx/store';
 import * as LoginVOActions from '../../actions/loginvo.actions';
-import { MyDatLoginaStore } from '../../reducers/login.reducer';
 import { Observable } from 'rxjs';
 import { nameSelector, regIDSelector } from '../../selector/logion.selectors';
+import { MyDatLoginaStore } from '../../reducers/app.state';
 
 
 

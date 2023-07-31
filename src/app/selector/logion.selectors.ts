@@ -1,5 +1,6 @@
 import {  createFeatureSelector, createSelector } from '@ngrx/store';
-import { MyDatLoginaStore } from '../reducers/login.reducer';
+import { MyDatLoginaStore } from '../reducers/app.state';
+
 
 export const nameSelector = createSelector( 
     createFeatureSelector('myDataStore'),

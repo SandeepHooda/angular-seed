@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, props } from '@ngrx/store'
 import {LoginVO}  from '../comp/read-data/LoginVO';
 import { createAction } from '@ngrx/store';
-import { provideCloudinaryLoader } from '@angular/common';
-import { Observable } from 'rxjs';
+
 
 export const GET_LOGIN = '[LOGIN] Get data'
 export const GET_LOGIN_SUCCESS = '[LOGIN] Success'
